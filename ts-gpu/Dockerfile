@@ -2,7 +2,7 @@
 # transcription stream ts-gpu image
 #
 # Start from a smaller base image, such as Ubuntu slim or Alpine if possible
-FROM nvidia/cuda:12.0.1-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:12.0.1-cudnn8-runtime-ubuntu20.04
 
 
 # Set environment variables to reduce interaction during package installation
