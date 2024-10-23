@@ -8,6 +8,9 @@ FROM nvidia/cuda:12.0.1-cudnn8-runtime-ubuntu22.04
 # Set environment variables to reduce interaction during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Declare the argument to accept the password during the build
+ARG TRANSCRIPTION_USER_PASSWORD
+
 # Update and install necessary packages in a single RUN command and clean up in the same layer
 RUN apt-get update && apt-get install -y \
     python3.9 \
@@ -54,7 +57,7 @@ RUN dos2unix /root/scripts/ts-control.sh \
     && dos2unix /root/scripts/auto-summary.py
 
 # Create a new user and setup the environment
-RUN useradd -m -p $(openssl passwd -1 nomoresaastax) transcriptionstream \
+RUN useradd -m -p $(openssl passwd -1 "$TRANSCRIPTION_USER_PASSWORD") transcriptionstream \
  && mkdir -p /home/transcriptionstream/incoming \
  && mkdir -p /home/transcriptionstream/transcribed \
  && mkdir -p /home/transcriptionstream/incoming/diarize \
