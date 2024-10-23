@@ -19,12 +19,11 @@ RUN apt-get update && apt-get install -y \
     cython3 \
     git \
     python3-wheel \
-#    nvidia-cuda-toolkit \
-#    nvidia-cuda-toolkit-gcc \
+    dos2unix \  # Install dos2unix here
     tzdata \
  && rm -rf /var/lib/apt/lists/*
 
-# added to fix sox/numpy error while installing whisper-diarization 03/24/2024
+# Added to fix sox/numpy error while installing whisper-diarization 03/24/2024
 RUN pip install typing_extensions
 RUN pip install numpy
 
@@ -46,6 +45,13 @@ COPY test.wav /home/transcriptionstream/
 COPY ts-summarize.py /root/scripts/
 COPY index-single.py /root/scripts/
 COPY auto-summary.py /root/scripts/
+
+# Run dos2unix on the copied scripts to fix line endings
+RUN dos2unix /root/scripts/ts-control.sh \
+    && dos2unix /root/scripts/transcribe_example.sh \
+    && dos2unix /root/scripts/ts-summarize.py \
+    && dos2unix /root/scripts/index-single.py \
+    && dos2unix /root/scripts/auto-summary.py
 
 # Create a new user and setup the environment
 RUN useradd -m -p $(openssl passwd -1 nomoresaastax) transcriptionstream \
