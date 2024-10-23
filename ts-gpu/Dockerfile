@@ -22,8 +22,8 @@ RUN apt-get update && apt-get install -y \
     cython3 \
     git \
     python3-wheel \
-    dos2unix \  # Install dos2unix here
-    tzdata \
+    dos2unix \
+    TZDATA \
  && rm -rf /var/lib/apt/lists/*
 
 # Added to fix sox/numpy error while installing whisper-diarization 03/24/2024
