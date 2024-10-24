@@ -51,10 +51,7 @@ COPY auto-summary.py /root/scripts/
 
 # Run dos2unix on the copied scripts to fix line endings
 RUN dos2unix /root/scripts/ts-control.sh \
-    && dos2unix /root/scripts/transcribe_example.sh \
-    && dos2unix /root/scripts/ts-summarize.py \
-    && dos2unix /root/scripts/index-single.py \
-    && dos2unix /root/scripts/auto-summary.py
+    && dos2unix /root/scripts/transcribe_example.sh
 
 # Create a new user and setup the environment
 RUN useradd -m -p $(openssl passwd -1 "$TRANSCRIPTION_USER_PASSWORD") transcriptionstream \
