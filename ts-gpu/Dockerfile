@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     git \
     python3-wheel \
     dos2unix \
-    TZDATA \
+    tzdata \
  && rm -rf /var/lib/apt/lists/*
 
 # Added to fix sox/numpy error while installing whisper-diarization 03/24/2024
