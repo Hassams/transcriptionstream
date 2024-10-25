@@ -30,6 +30,11 @@ RUN apt-get update && apt-get install -y \
 RUN pip install typing_extensions
 RUN pip install numpy
 
+# Replace with the desired older version
+RUN pip install speechbrain==0.5.11 
+RUN pip install nemo_toolkit
+RUN apt-get update && apt-get install -y libcudnn8
+
 # Clone only the necessary branch or commit of whisper-diarization to reduce size
 RUN git clone --depth 1 https://github.com/transcriptionstream/whisper-diarization.git
 
